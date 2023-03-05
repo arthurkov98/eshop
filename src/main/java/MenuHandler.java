@@ -29,7 +29,7 @@ public abstract class MenuHandler {
             if(a == null) continue;
             if(a.num() == num){
                 try {
-                    method.invoke(this, (Object) null);
+                    method.invoke(this, null);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     throw new RuntimeException(e);
                 }
