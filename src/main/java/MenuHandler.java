@@ -1,9 +1,9 @@
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class MenuHandler {
@@ -15,13 +15,12 @@ public abstract class MenuHandler {
         isWorking = true;
     }
     public List<String> getListMethod(){
-        List<String> list = Arrays.stream(methods)
+        return Arrays.stream(methods)
                 .map(m -> m.getAnnotation(MenuHandleInfo.class))
-                .filter(a -> a != null)
-                .sorted(Comparator.comparingInt(x -> x.num()))
-                .map(a -> a.desc())
+                .filter(Objects::nonNull)
+                .sorted(Comparator.comparingInt(MenuHandleInfo::num))
+                .map(MenuHandleInfo::desc)
                 .collect(Collectors.toList());
-        return list;
     }
 
     public void handleChoice(int num){
@@ -30,10 +29,8 @@ public abstract class MenuHandler {
             if(a == null) continue;
             if(a.num() == num){
                 try {
-                    method.invoke(this, null);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
+                    method.invoke(this, (Object) null);
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     throw new RuntimeException(e);
                 }
                 return;
