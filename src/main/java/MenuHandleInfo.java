@@ -5,7 +5,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CLIInfo {
+public @interface MenuHandleInfo {
     String desc();
     int num();
 
