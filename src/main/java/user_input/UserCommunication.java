@@ -28,7 +28,7 @@ public class UserCommunication {
         return scanner.nextLine();
     }
     public Integer getNum() {
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
 }
