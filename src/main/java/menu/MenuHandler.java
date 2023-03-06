@@ -1,3 +1,5 @@
+package menu;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -10,11 +12,13 @@ public abstract class MenuHandler {
     private final Method[] methods;
 
     public boolean isWorking;
-    public MenuHandler(){
+
+    public MenuHandler() {
         methods = this.getClass().getDeclaredMethods();
         isWorking = true;
     }
-    public List<String> getListMethod(){
+
+    public List<String> getListMethod() {
         return Arrays.stream(methods)
                 .map(m -> m.getAnnotation(MenuHandleInfo.class))
                 .filter(Objects::nonNull)
@@ -23,13 +27,13 @@ public abstract class MenuHandler {
                 .collect(Collectors.toList());
     }
 
-    public void handleChoice(int num){
-        for (Method method : methods){
+    public void handleChoice(int num) {
+        for (Method method : methods) {
             MenuHandleInfo a = method.getAnnotation(MenuHandleInfo.class);
-            if(a == null) continue;
-            if(a.num() == num){
+            if (a == null) continue;
+            if (a.num() == num) {
                 try {
-                    method.invoke(this, (Object) null);
+                    method.invoke(this, (Object[]) null);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     throw new RuntimeException(e);
                 }
