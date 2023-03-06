@@ -29,6 +29,10 @@ public class Item {
         quantityAvailable -= amount;
     }
 
+    public void increaseQuantityAvailable(Integer amount) {
+        quantityAvailable -= amount;
+    }
+
     @Override
     public String toString() {
         return "id=" + id +

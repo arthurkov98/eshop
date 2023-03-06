@@ -16,4 +16,8 @@ public class OrderedItem {
                 ", ordered quantity=" + quantityOrdered;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
 }

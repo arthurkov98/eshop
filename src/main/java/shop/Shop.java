@@ -35,6 +35,10 @@ public class Shop {
         }
     }
 
+    public void increaseItemQuantity(Item item, Integer amount) {
+        item.increaseQuantityAvailable(amount);
+    }
+
     private boolean itemExists(String itemName) {
         return findByName(itemName).isPresent();
     }

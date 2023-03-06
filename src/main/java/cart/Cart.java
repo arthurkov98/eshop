@@ -6,6 +6,7 @@ import shop.Shop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Cart {
 
@@ -20,4 +21,24 @@ public class Cart {
         shop.decreaseItemQuantity(item, orderedQuantity);
     }
 
+    public void removeItem(Item item, Integer orderedQuantity, Shop shop) {
+        orders.remove(new OrderedItem(item, orderedQuantity));
+        shop.increaseItemQuantity(item, orderedQuantity);
+    }
+
+    public Optional<OrderedItem> findByName(String itemName) {
+        return orders.stream().filter(orderedItem -> (orderedItem.getItem().getName()).equals(itemName)).findFirst();
+    }
+
+    private boolean itemExists(String itemName) {
+        return findByName(itemName).isPresent();
+    }
+
+    public boolean itemAvailable(String userInputItem) {
+        Cart cart = new Cart();
+        if (userInputItem.equalsIgnoreCase(String.valueOf(Optional.of(cart.findByName(userInputItem))))) {
+            return true;
+        }
+        return false;
+    }
 }
