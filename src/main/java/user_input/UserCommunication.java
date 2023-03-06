@@ -24,4 +24,8 @@ public class UserCommunication {
         return scanner.nextInt();
     }
 
+    public Integer getNum() {
+        return scanner.nextInt();
+    }
+
 }
