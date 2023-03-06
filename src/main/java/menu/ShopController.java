@@ -4,6 +4,7 @@ import cart.Cart;
 import item_generator.RandomItemGeneratorImpl;
 import menu.actions.AddItemToCartAction;
 import menu.actions.ListItemsAction;
+import menu.actions.RemoveFromCartAction;
 import shop.Shop;
 
 public class ShopController extends MenuHandler {
@@ -23,7 +24,7 @@ public class ShopController extends MenuHandler {
 
     @MenuHandleInfo(desc = "3. Remove item from the cart", num = 3)
     public void removeFromCart() {
-        System.out.println("TBI: Remove item from the cart.");
+        new RemoveFromCartAction().run(shop, cart);
     }
 
     @MenuHandleInfo(desc = "9. Exit", num = 9)

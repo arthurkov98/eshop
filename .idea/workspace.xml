@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c39fc86-00d3-456b-88df-4c11690bb634" name="Changes" comment="fixed handleChoice">
+    <list default="true" id="2c39fc86-00d3-456b-88df-4c11690bb634" name="Changes" comment="add userCommunication to Menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user_input/UserCommunication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user_input/UserCommunication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/menu/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/menu/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/menu/actions/RemoveFromCartAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/menu/actions/RemoveFromCartAction.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,8 +88,33 @@
       <option name="project" value="LOCAL" />
       <updated>1678029481309</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add userCommunication to Menu">
+      <created>1678103665822</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678103665822</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add userCommunication to Menu">
+      <created>1678103759545</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678103759545</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -99,6 +124,36 @@
             <State />
           </value>
         </entry>
+        <entry key="dd292ca0-c923-49d9-9018-33ddaa1caeb2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/Professional/IdeaProjects/eshop/src/main/java" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="dd292ca0-c923-49d9-9018-33ddaa1caeb2" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -106,6 +161,18 @@
     <MESSAGE value="test" />
     <MESSAGE value="fixed warnings" />
     <MESSAGE value="fixed handleChoice" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed handleChoice" />
+    <MESSAGE value="add userCommunication to Menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="add userCommunication to Menu" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/menu/actions/RemoveFromCartAction.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

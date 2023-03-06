@@ -15,7 +15,7 @@ public class RemoveFromCartAction {
 
     private final UserCommunication userCommunication = new UserCommunication();
 
-    public void run(OrderedItem orderedItem, Cart cart, Shop shop) {
+    public void run(Shop shop, Cart cart) {
         userCommunication.requestInput(PROMPT_TOPIC_ITEM);
         String userInputItem = userCommunication.getItem();
         if (cart.itemAvailable(userInputItem)) {
