@@ -1,9 +1,17 @@
 package menu;
 
-import java.util.Scanner;
+import user_input.UserCommunication;
 
 public class Menu {
-    MenuHandler handler;
+    private final MenuHandler handler;
+
+    private final UserCommunication userCommunication = new UserCommunication();
+
+    private static final String MENU_MESSAGE = "Program menu:";
+
+    private static final String ERROR_NOT_INT_MESSAGE = "Please type number!";
+
+    private static final String MENU_INPUT_MESSAGE = "Program menu:";
 
     public Menu(MenuHandler handler) {
         this.handler = handler;
@@ -11,23 +19,26 @@ public class Menu {
 
     public void run() {
         while (handler.isWorking) {
-            System.out.println("Program menu:");
-            for (String str : handler.getListMethod()) {
-                System.out.println(str);
-            }
-            System.out.println();
-            System.out.println("Enter menu item number to execute:");
-            Scanner scanner = new Scanner(System.in);
+
+            printMenu();
+
             try {
-                int userChoice = Integer.parseInt(scanner.nextLine());
+                int userChoice = userCommunication.getNum();
                 this.handler.handleChoice(userChoice);
             } catch (NumberFormatException e) {
-                System.out.println("Please type number!");
-                System.out.println();
+                userCommunication.informUser(ERROR_NOT_INT_MESSAGE);
             } catch (RuntimeException e) {
-                System.out.println(e.getMessage());
+                userCommunication.informUser(e.getMessage());
             }
+            userCommunication.informUser("");
         }
 
+    }
+
+    private void printMenu(){
+        userCommunication.informUser(MENU_MESSAGE);
+        handler.getListMethod().forEach(userCommunication::informUser);
+        userCommunication.informUser("");
+        userCommunication.informUser(MENU_INPUT_MESSAGE);
     }
 }

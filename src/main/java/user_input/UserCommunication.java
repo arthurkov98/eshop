@@ -27,4 +27,8 @@ public class UserCommunication {
     public String removeItem() {
         return scanner.nextLine();
     }
+    public Integer getNum() {
+        return scanner.nextInt();
+    }
+
 }
