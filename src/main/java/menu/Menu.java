@@ -2,9 +2,6 @@ package menu;
 
 import user_input.UserCommunication;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Menu {
     private final MenuHandler handler;
 
@@ -29,7 +26,7 @@ public class Menu {
                 int userChoice = userCommunication.getNum();
                 this.handler.handleChoice(userChoice);
             } catch (NumberFormatException e) {
-                userCommunication.informUser(MENU_INPUT_MESSAGE);
+                userCommunication.informUser(ERROR_NOT_INT_MESSAGE);
             } catch (RuntimeException e) {
                 userCommunication.informUser(e.getMessage());
             }
