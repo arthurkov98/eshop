@@ -35,10 +35,11 @@ public class Cart {
     }
 
     public boolean itemAvailable(String userInputItem) {
-        Cart cart = new Cart();
-        if (userInputItem.equalsIgnoreCase(String.valueOf(Optional.of(cart.findByName(userInputItem))))) {
+        if (findByName(userInputItem).isPresent() ) {
             return true;
         }
         return false;
     }
+
+
 }
