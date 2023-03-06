@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class Cart {
-    Cart cart = new Cart();
 
     List<OrderedItem> orders = new ArrayList<>();
 
@@ -36,9 +35,11 @@ public class Cart {
     }
 
     public boolean itemAvailable(String userInputItem) {
-        if (userInputItem.equalsIgnoreCase(String.valueOf(Optional.of(cart.findByName(userInputItem))))) {
+        if (findByName(userInputItem).isPresent() ) {
             return true;
         }
         return false;
     }
+
+
 }
