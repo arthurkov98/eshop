@@ -10,6 +10,8 @@ public class ShopController extends MenuHandler {
     private final Shop shop = new Shop(new RandomItemGeneratorImpl());
     private final Cart cart = new Cart();
 
+    /* all desc-s should probably be String constants */
+    /* but this whole menu thing will be changed, so who cares.. */
     @MenuHandleInfo(desc = "1. List items", num = 1)
     public void listItems() {
         new ListItemsAction().run(shop.getItems());
@@ -34,7 +36,6 @@ public class ShopController extends MenuHandler {
     public void buyItem() {
         new BuyAction().run(cart, shop);
     }
-
 
     @MenuHandleInfo(desc = "9. Exit", num = 9)
     public void exit() {

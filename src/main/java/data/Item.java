@@ -30,7 +30,8 @@ public class Item {
     }
 
     public void increaseQuantityAvailable(Integer amount) {
-        quantityAvailable -= amount;
+        /* wut? */
+        quantityAvailable /* o.0 */-= amount;
     }
 
     @Override

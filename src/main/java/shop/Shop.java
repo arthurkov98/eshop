@@ -44,8 +44,10 @@ public class Shop {
         return findByName(itemName).isPresent();
     }
 
+    /* why is there a public method after a private one? */
     public void buy(Cart cart){
         cart.getOrders().clear();
+        /* IMHO green text in the code is the source of all evil */
         System.out.println("You bought items from your cart");
     }
 }

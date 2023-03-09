@@ -24,9 +24,12 @@ public class UserCommunication {
         return scanner.nextInt();
     }
 
+    /* what's this? */
+    /* even git points this out before push */
     public String removeItem() {
         return scanner.nextLine();
     }
+
     public Integer getNum() {
         return Integer.parseInt(scanner.nextLine());
     }

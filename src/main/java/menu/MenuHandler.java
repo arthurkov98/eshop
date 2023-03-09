@@ -40,6 +40,7 @@ public abstract class MenuHandler {
                 return;
             }
         }
+        /* green text in code is bad IMHO */
         throw new RuntimeException("Wrong input! This number doesn't exist in menu:" + num);
     }
 
