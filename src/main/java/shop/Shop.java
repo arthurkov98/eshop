@@ -1,5 +1,6 @@
 package shop;
 
+import cart.Cart;
 import data.Item;
 import item_generator.ItemGenerator;
 
@@ -43,4 +44,8 @@ public class Shop {
         return findByName(itemName).isPresent();
     }
 
+    public void buy(Cart cart){
+        cart.getOrders().clear();
+        System.out.println("You bought items from your cart");
+    }
 }

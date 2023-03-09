@@ -4,7 +4,7 @@ import data.OrderedItem;
 
 import java.util.List;
 
-public class OrderedItemAction {
+public class ListOrderedItemAction {
 
     public void run(List<OrderedItem> orderedItems) {
         orderedItems.forEach(System.out::println);
