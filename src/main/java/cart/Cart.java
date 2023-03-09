@@ -30,15 +30,8 @@ public class Cart {
         return orders.stream().filter(orderedItem -> (orderedItem.getItem().getName()).equals(itemName)).findFirst();
     }
 
-    private boolean itemExists(String itemName) {
-        return findByName(itemName).isPresent();
-    }
-
     public boolean itemAvailable(String userInputItem) {
-        if (findByName(userInputItem).isPresent() ) {
-            return true;
-        }
-        return false;
+        return findByName(userInputItem).isPresent();
     }
 
 
