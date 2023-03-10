@@ -21,16 +21,16 @@ public class Cart {
         shop.decreaseItemQuantity(item, orderedQuantity);
     }
 
-    public void removeItem(Item item, Integer orderedQuantity, Shop shop) {
+    public void removeItem(Item item, Integer removedQuantity, Shop shop) {
         /* this does not work */
         /* we need to remove an existing item, not "new" */
         /* if we want to partially remove orders,
            then we have to either decrease quantityOrdered or yeet the whole thing out */
         /* you can assign orders.remove() to a boolean to see, that it does not remove anything */
         /* you could also write tests.. */
-        orders.remove(new OrderedItem(item, orderedQuantity));
+        orders.remove(new OrderedItem(item, removedQuantity));
         /* this actually decreases available quantity */
-        shop.increaseItemQuantity(item, orderedQuantity);
+        shop.increaseItemQuantity(item, removedQuantity);
     }
 
     public Optional<OrderedItem> findByName(String itemName) {
