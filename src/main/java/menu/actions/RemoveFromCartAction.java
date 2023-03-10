@@ -8,8 +8,8 @@ import user_input.UserCommunication;
 
 public class RemoveFromCartAction {
     private static final String PROMPT_TOPIC_ITEM = "an item you wish to remove: ";
-    private static final String PROMPT_TOPIC_QUANTITY = " quantity to be removed: "; /* extra space */
-    private static final String MESSAGE_ITEM_REMOVED = "Item removed to your cart"; /* from & .*/
+    private static final String PROMPT_TOPIC_QUANTITY = "quantity to be removed: ";
+    private static final String MESSAGE_ITEM_REMOVED = "Item removed from your cart";
     private static final String MESSAGE_NO_SUCH_ITEM = "Error: No such item.";
     private static final String MESSAGE_NOT_ENOUGH_QUANTITY = "Error: removing quantity lower than ordered amount.";
                                                                 /* this has nothing to do with available quantity */
