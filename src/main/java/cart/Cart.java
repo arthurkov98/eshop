@@ -22,16 +22,14 @@ public class Cart {
     }
 
     public void removeItem(Item item, Integer removedQuantity, Shop shop) {
-        /* this does not work */
-        /* we need to remove an existing item, not "new" */
-        /* if we want to partially remove orders,
-           then we have to either decrease quantityOrdered or yeet the whole thing out */
-        /* you can assign orders.remove() to a boolean to see, that it does not remove anything */
-        /* you could also write tests.. */
-        orders.remove(new OrderedItem(item, removedQuantity));
-        /* this actually decreases available quantity */
-        shop.increaseItemQuantity(item, removedQuantity);
-    }
+        for (int i = 1; i < orders.size(); i++) {
+            if (orders.get(i).getItem().equals(item) && orders.get(i).getQuantityOrdered() >= removedQuantity) {
+                orders.remove(orders.get(i));
+  //              orders.add(new OrderedItem(orders.get(i).getItem(), orders.get(i).getQuantityOrdered()-removedQuantity));
+                } shop.increaseItemQuantity(item, removedQuantity);
+            }
+        }
+//    }
 
     public Optional<OrderedItem> findByName(String itemName) {
         return orders.stream().filter(orderedItem -> (orderedItem.getItem().getName()).equals(itemName)).findFirst();
