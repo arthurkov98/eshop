@@ -1,7 +1,7 @@
 package cart;
 
+import data.CartItem;
 import data.Item;
-import data.OrderedItem;
 import shop.Shop;
 
 import java.util.ArrayList;
@@ -10,14 +10,14 @@ import java.util.Optional;
 
 public class Cart {
 
-    List<OrderedItem> orders = new ArrayList<>();
+    List<CartItem> orders = new ArrayList<>();
 
-    public List<OrderedItem> getOrders() {
+    public List<CartItem> getOrders() {
         return orders;
     }
 
     public void addItem(Item item, Integer orderedQuantity, Shop shop) {
-        orders.add(new OrderedItem(item, orderedQuantity));
+        orders.add(new CartItem(item, orderedQuantity));
         shop.decreaseItemQuantity(item, orderedQuantity);
     }
 
@@ -29,14 +29,15 @@ public class Cart {
             if (orders.get(i).getItem().equals(item) && orders.get(i).getQuantityOrdered() >= removedQuantity) {
                 /* it removes the whole item */
                 orders.remove(orders.get(i));
-  //              orders.add(new OrderedItem(orders.get(i).getItem(), orders.get(i).getQuantityOrdered()-removedQuantity));
-                } /* but only increases amount by removedQuantity */shop.increaseItemQuantity(item, removedQuantity);/* also, what's with that formatting? (ctrl+alt+l) */
-            }
+                //              orders.add(new CartItem(orders.get(i).getItem(), orders.get(i).getQuantityOrdered()-removedQuantity));
+            } /* but only increases amount by removedQuantity */
+            shop.increaseItemQuantity(item, removedQuantity);/* also, what's with that formatting? (ctrl+alt+l) */
         }
+    }
 //    }
 
-    public Optional<OrderedItem> findByName(String itemName) {
-        return orders.stream().filter(orderedItem -> (orderedItem.getItem().getName()).equals(itemName)).findFirst();
+    public Optional<CartItem> findByName(String itemName) {
+        return orders.stream().filter(cartItem -> (cartItem.getItem().getName()).equals(itemName)).findFirst();
     }
 
     public boolean itemAvailable(String userInputItem) {

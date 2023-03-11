@@ -10,7 +10,7 @@ import lombok.Data;
 /* I'll try to get Lombok working there on Saturday */
 @Data
 @AllArgsConstructor
-public class OrderedItem {
+public class CartItem {
 
     private final Item item;
     private Integer quantityOrdered;

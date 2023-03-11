@@ -1,8 +1,8 @@
 package database;
 
 import cart.Cart;
+import data.CartItem;
 import data.Item;
-import data.OrderedItem;
 import shop.Shop;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 /* why does it even exist? */
 public class InMemoryDatabaseImpl implements Database {
 
-    List<OrderedItem> orderedItems = new ArrayList<>();
+    List<CartItem> cartItems = new ArrayList<>();
     List<Item> items = new ArrayList<>();
 
     @Override
@@ -22,10 +22,10 @@ public class InMemoryDatabaseImpl implements Database {
 
     @Override
     public void removeFromCart(String itemName) {
-        orderedItems.stream()
-                .filter(orderedItem -> orderedItem.getItem().getName().equalsIgnoreCase(itemName))
+        cartItems.stream()
+                .filter(cartItem -> cartItem.getItem().getName().equalsIgnoreCase(itemName))
                 .findFirst()
-                .ifPresent(orderedItem -> orderedItems.remove(orderedItem));
+                .ifPresent(cartItem -> cartItems.remove(cartItem));
     }
 
     @Override
