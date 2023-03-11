@@ -12,6 +12,7 @@ public class ListOrderedItemAction {
     public void run(List<OrderedItem> orderedItems) {
         orderedItems.forEach(System.out::println);
         if (orderedItems.isEmpty()) {
+            /* this should be a class constant */
             String MESSAGE_CART_IS_EMPTY = "Your cart is empty";
             userCommunication.informUser(MESSAGE_CART_IS_EMPTY);
         }

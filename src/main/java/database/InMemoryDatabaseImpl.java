@@ -8,6 +8,8 @@ import shop.Shop;
 import java.util.ArrayList;
 import java.util.List;
 
+/* this whole class isn't used anywhere */
+/* why does it even exist? */
 public class InMemoryDatabaseImpl implements Database {
 
     List<OrderedItem> orderedItems = new ArrayList<>();
