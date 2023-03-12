@@ -1,5 +1,7 @@
 package console_ui;
 
+import services.AddItemToCartService;
+import services.ExitService;
 import user_input.UserCommunication;
 
 public class ExitUIAction implements UIAction {
@@ -9,15 +11,17 @@ public class ExitUIAction implements UIAction {
     private static final String MESSAGE_EXIT = "Thank you for shopping at Planet Express.";
 
     private final UserCommunication userCommunication;
+    private final ExitService exitService;
 
-    public ExitUIAction(UserCommunication userCommunication) {
+    public ExitUIAction(ExitService exitService, UserCommunication userCommunication) {
         this.userCommunication = userCommunication;
+        this.exitService = exitService;
     }
 
     @Override
     public void execute() {
         userCommunication.informUser(MESSAGE_EXIT);
-        System.exit(0);
+        exitService.execute();
     }
 
     @Override

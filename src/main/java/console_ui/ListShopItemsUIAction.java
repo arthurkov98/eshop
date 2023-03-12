@@ -1,7 +1,10 @@
 package console_ui;
 
 import database.ItemDatabase;
+import services.ListShopItemsService;
 import user_input.UserCommunication;
+
+import java.util.List;
 
 public class ListShopItemsUIAction implements UIAction {
 
@@ -9,18 +12,19 @@ public class ListShopItemsUIAction implements UIAction {
 
     private static final String HEADER_TEXT = "Shop items:";
 
-    private final ItemDatabase itemDatabase;
+    private final ListShopItemsService listShopItemsService;
     private final UserCommunication userCommunication;
 
-    public ListShopItemsUIAction(ItemDatabase itemDatabase, UserCommunication userCommunication) {
-        this.itemDatabase = itemDatabase;
+    public ListShopItemsUIAction(ListShopItemsService listShopItemsService, UserCommunication userCommunication) {
+        this.listShopItemsService = listShopItemsService;
         this.userCommunication = userCommunication;
     }
 
     @Override
     public void execute() {
         userCommunication.informUser(HEADER_TEXT);
-        itemDatabase.getAllItems().forEach(item -> userCommunication.informUser(item.toString()));
+        List<String> items= listShopItemsService.execute();
+        items.forEach(userCommunication::informUser);
     }
 
     @Override

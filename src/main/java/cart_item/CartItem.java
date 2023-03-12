@@ -32,7 +32,7 @@ public class CartItem {
 
     @Override
     public String toString() {
-        return "name='" + item.getName() +
+        return "name='" + item.getName() + "'" +
                 ", price=" + item.getPrice() +
                 ", ordered quantity=" + orderedQuantity;
     }
