@@ -24,13 +24,11 @@ public class UserCommunication {
         return scanner.nextInt();
     }
 
-    /* what's this? */
-    /* even git points this out before push */
-    public String removeItem() {
-        return scanner.nextLine();
+    public void clearBuffer() {
+        scanner.nextLine();
     }
 
-    public Integer getNum() {
+    public Integer getMenuActionNumber() {
         return Integer.parseInt(scanner.nextLine());
     }
 

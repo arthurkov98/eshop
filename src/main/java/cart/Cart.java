@@ -1,47 +1,40 @@
 package cart;
 
-import data.CartItem;
-import data.Item;
-import shop.Shop;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.Objects;
 
+@Data
 public class Cart {
 
-    List<CartItem> orders = new ArrayList<>();
+    private Long id;
+    private CartStatus cartStatus;
+    private LocalDate lastActionDate;
 
-    public List<CartItem> getOrders() {
-        return orders;
+    public Cart() {
+        this.cartStatus = CartStatus.OPEN;
+        this.lastActionDate = LocalDate.now();
     }
 
-    public void addItem(Item item, Integer orderedQuantity, Shop shop) {
-        orders.add(new CartItem(item, orderedQuantity));
-        shop.decreaseItemQuantity(item, orderedQuantity);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return Objects.equals(id, cart.id) && Objects.equals(lastActionDate, cart.lastActionDate) && cartStatus == cart.cartStatus;
     }
 
-    public void removeItem(Item item, Integer removedQuantity, Shop shop) {
-        /* why does i start from 1? */
-        for (int i = 1; i < orders.size(); i++) {
-            /* IMHO it is better to compare names or add an equals() method to Item */
-            /* it feels like equals() works, only because our implementation of addItem() is bad */
-            if (orders.get(i).getItem().equals(item) && orders.get(i).getQuantityOrdered() >= removedQuantity) {
-                /* it removes the whole item */
-                orders.remove(orders.get(i));
-                //              orders.add(new CartItem(orders.get(i).getItem(), orders.get(i).getQuantityOrdered()-removedQuantity));
-            } /* but only increases amount by removedQuantity */
-            shop.increaseItemQuantity(item, removedQuantity);/* also, what's with that formatting? (ctrl+alt+l) */
-        }
-    }
-//    }
-
-    public Optional<CartItem> findByName(String itemName) {
-        return orders.stream().filter(cartItem -> (cartItem.getItem().getName()).equals(itemName)).findFirst();
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, lastActionDate, cartStatus);
     }
 
-    public boolean itemAvailable(String userInputItem) {
-        return findByName(userInputItem).isPresent();
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", last cart action date=" + lastActionDate +
+                ", cart status=" + cartStatus;
     }
 
 }

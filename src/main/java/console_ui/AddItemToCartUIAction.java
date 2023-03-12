@@ -1,30 +1,32 @@
 package console_ui;
 
-import data.CartItem;
-import data.Item;
+import cart_item.CartItem;
+import database.CartItemDatabase;
+import database.ItemDatabase;
+import item.Item;
 import user_input.UserCommunication;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Optional;
 
-// TODO really needs a functioning DB
 public class AddItemToCartUIAction implements UIAction {
 
-    private static final String PROMPT_TOPIC_ITEM = "an item you wish to order: ";
-    private static final String PROMPT_TOPIC_QUANTITY = " quantity to be ordered: ";
-    private static final String MESSAGE_ITEM_ADDED = "Item added to your cart.";
-    private static final String MESSAGE_NO_SUCH_ITEM = "Error: No such item.";
-    private static final String ERROR_NOT_A_NUMBER = "Error: Quantity should be a number.";
-    private static final String MESSAGE_NOT_ENOUGH_QUANTITY = "Error: Available quantity lower than ordered amount.";
+    private static final String ACTION_NAME = "Add item to the cart";
 
-    private final List<Item> shopItems;
-    private final List<CartItem> cartItems;
+    private static final String PROMPT_TOPIC_ITEM = "an item you wish to order: ";
+    private static final String PROMPT_TOPIC_QUANTITY = "quantity to be ordered: ";
+    private static final String MESSAGE_ITEM_ADDED = "Item added to your cart.";
+    private static final String ERROR_NO_SUCH_ITEM = "Error: No such item.";
+    private static final String ERROR_NOT_A_NUMBER = "Error: Quantity should be a number.";
+    private static final String ERROR_NOT_ENOUGH_QUANTITY = "Error: Available quantity lower than ordered amount.";
+
+    private final ItemDatabase itemDatabase;
+    private final CartItemDatabase cartItemDatabase;
     private final UserCommunication userCommunication;
 
-    public AddItemToCartUIAction(List<Item> shopItems, List<CartItem> cartItems, UserCommunication userCommunication) {
-        this.shopItems = shopItems;
-        this.cartItems = cartItems;
+    public AddItemToCartUIAction(ItemDatabase itemDatabase, CartItemDatabase cartItemDatabase, UserCommunication userCommunication) {
+        this.itemDatabase = itemDatabase;
+        this.cartItemDatabase = cartItemDatabase;
         this.userCommunication = userCommunication;
     }
 
@@ -37,43 +39,46 @@ public class AddItemToCartUIAction implements UIAction {
             userCommunication.requestInput(PROMPT_TOPIC_QUANTITY);
             try {
                 Integer orderedQuantity = userCommunication.getQuantity();
-                if (orderQuantityValid(orderedQuantity, item)) {
-                    cartItems.add(new CartItem(item, orderedQuantity));
-                    decreaseItemQuantity(item, orderedQuantity);
+                if (orderedQuantityValid(orderedQuantity, item)) {
+                    cartItemDatabase.save(new CartItem(item, orderedQuantity));
+                    Integer newAvailableQuantity = item.getAvailableQuantity() - orderedQuantity;
+                    itemDatabase.changeAvailableQuantity(item.getId(), newAvailableQuantity);
                     userCommunication.informUser(MESSAGE_ITEM_ADDED);
                 } else {
-                    userCommunication.informUser(MESSAGE_NOT_ENOUGH_QUANTITY);
+                    userCommunication.informUser(ERROR_NOT_ENOUGH_QUANTITY);
                 }
             } catch (InputMismatchException e) {
                 userCommunication.informUser(ERROR_NOT_A_NUMBER);
             }
+            userCommunication.clearBuffer();
         } else {
-            userCommunication.informUser(MESSAGE_NO_SUCH_ITEM);
+            userCommunication.informUser(ERROR_NO_SUCH_ITEM);
         }
+    }
+
+    @Override
+    public String getActionName() {
+        return ACTION_NAME;
     }
 
     private boolean itemAvailable(String itemName) {
         return itemExists(itemName) &&
-                findByName(itemName).get().getQuantityAvailable() > 0;
+                findByName(itemName).get().getAvailableQuantity() > 0;
     }
 
     private Optional<Item> findByName(String itemName) {
-        return shopItems.stream().filter(item -> item.getName().equals(itemName)).findFirst();
+        return itemDatabase.getAllItems().stream()
+                .filter(item -> item.getName().equals(itemName))
+                .findFirst();
     }
 
     private boolean itemExists(String itemName) {
         return findByName(itemName).isPresent();
     }
 
-    private boolean orderQuantityValid(Integer quantityOrdered, Item item) {
+    private boolean orderedQuantityValid(Integer quantityOrdered, Item item) {
         return quantityOrdered > 0 &&
-                quantityOrdered <= item.getQuantityAvailable();
-    }
-
-    private void decreaseItemQuantity(Item item, Integer amount) {
-        if (itemAvailable(item.getName())) {
-            item.decreaseQuantityAvailable(amount);
-        }
+                quantityOrdered <= item.getAvailableQuantity();
     }
 
 }

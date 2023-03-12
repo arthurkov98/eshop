@@ -11,28 +11,31 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-// TODO MOAR
-class AddItemToCartUIActionTest {
+class RemoveItemFromCartUIActionTest {
 
     private final ItemDatabase mockItemDatabase = mock(ItemDatabase.class);
     private final CartItemDatabase mockCartItemDatabase = mock(CartItemDatabase.class);
     private final UserCommunication mockUserCommunication = mock(UserCommunication.class);
     private final Item mockItem = mock(Item.class);
+    private final CartItem mockCartItem = mock(CartItem.class);
 
-    private final AddItemToCartUIAction action =
-            new AddItemToCartUIAction(mockItemDatabase, mockCartItemDatabase, mockUserCommunication);
+    private final RemoveItemFromCartUIAction action =
+            new RemoveItemFromCartUIAction(mockItemDatabase, mockCartItemDatabase, mockUserCommunication);
 
     @Test
     void shouldAddItemAndDecreaseAvailableQuantity() {
         when(mockUserCommunication.getItem()).thenReturn("Slurm");
-        when(mockItemDatabase.getAllItems()).thenReturn(List.of(mockItem));
-        when(mockUserCommunication.getQuantity()).thenReturn(10);
+        when(mockCartItemDatabase.getAllCartItems()).thenReturn(List.of(mockCartItem));
+        when(mockCartItem.getItem()).thenReturn(mockItem);
         when(mockItem.getName()).thenReturn("Slurm");
-        when(mockItem.getAvailableQuantity()).thenReturn(20);
+        when(mockItemDatabase.getAllItems()).thenReturn(List.of(mockItem));
+        when(mockItem.getAvailableQuantity()).thenReturn(5);
+        when(mockCartItem.getOrderedQuantity()).thenReturn(3);
+        when(mockCartItem.getId()).thenReturn(1L);
         when(mockItem.getId()).thenReturn(1L);
         action.execute();
-        verify(mockCartItemDatabase).save(new CartItem(mockItem, 10));
-        verify(mockItemDatabase).changeAvailableQuantity(1L, 10);
+        verify(mockCartItemDatabase).deleteByID(1L);
+        verify(mockItemDatabase).changeAvailableQuantity(1L, 8);
     }
 
 }
