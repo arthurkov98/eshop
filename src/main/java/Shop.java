@@ -4,7 +4,7 @@ import console_ui.UIMenu;
 import database.*;
 import item.Item;
 import item_generator.RandomItemGeneratorImpl;
-import user_input.UserCommunication;
+import console_ui.UserCommunication;
 
 import java.util.List;
 

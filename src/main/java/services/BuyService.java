@@ -1,5 +1,6 @@
 package services;
 
+/* ctrl+alt+o is your friend */
 import cart.Cart;
 import cart.CartStatus;
 import cart_item.CartItem;
@@ -23,6 +24,7 @@ public class BuyService {
         Optional<Cart> userCart = cartDatabase.getAllCarts().stream()
                 .filter(cart -> cart.getCartStatus().equals(CartStatus.OPEN))
                 .findFirst();
+        /* again, generic exceptions are not welcome here */
         if (userCart.isEmpty()) throw new RuntimeException(ERROR_NO_OPEN_CART);
 
         cartDatabase.changeCartStatus(userCart.get().getId(), CartStatus.CLOSED);

@@ -1,11 +1,8 @@
 package console_ui;
 
-import database.CartItemDatabase;
 import services.ListCartItemsService;
-import user_input.UserCommunication;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ListCartItemsUIAction implements UIAction {
 

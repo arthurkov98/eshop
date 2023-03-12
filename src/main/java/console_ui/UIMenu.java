@@ -1,7 +1,5 @@
 package console_ui;
 
-import user_input.UserCommunication;
-
 import java.util.Map;
 
 public class UIMenu {

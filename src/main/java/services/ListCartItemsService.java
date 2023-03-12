@@ -12,7 +12,9 @@ public class ListCartItemsService {
         this.cartItemDatabase = cartItemDatabase;
     }
 
+    /* why are those strings? */
     public List<String> execute(){
+        /* i is still a very bad name */
         return cartItemDatabase.getAllCartItems().stream().map(i->i.toString()).collect(Collectors.toList());
     }
 }

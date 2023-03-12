@@ -4,7 +4,6 @@ import database.CartDatabase;
 import database.CartItemDatabase;
 import database.ItemDatabase;
 import services.*;
-import user_input.UserCommunication;
 
 import java.util.HashMap;
 import java.util.Map;

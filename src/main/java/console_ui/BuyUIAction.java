@@ -1,13 +1,6 @@
 package console_ui;
 
-import cart.Cart;
-import cart.CartStatus;
-import database.CartDatabase;
 import services.BuyService;
-import user_input.UserCommunication;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 public class BuyUIAction implements UIAction {
 
@@ -31,6 +24,7 @@ public class BuyUIAction implements UIAction {
             buyService.execute();
         }catch (RuntimeException e) {
             userCommunication.informUser(e.getMessage());
+            /* why is there a clearBuffer? */
             userCommunication.clearBuffer();
             return;
         }

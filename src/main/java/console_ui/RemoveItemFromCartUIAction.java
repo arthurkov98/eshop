@@ -1,14 +1,6 @@
 package console_ui;
 
-import cart_item.CartItem;
-import database.CartItemDatabase;
-import database.ItemDatabase;
-import item.Item;
 import services.RemoveItemFromCartService;
-import user_input.UserCommunication;
-
-import java.util.InputMismatchException;
-import java.util.Optional;
 
 public class RemoveItemFromCartUIAction implements UIAction {
 
@@ -33,7 +25,9 @@ public class RemoveItemFromCartUIAction implements UIAction {
         try {
             removeItemFromCartService.execute(userInputItem);
         }catch (RuntimeException e) {
+            /* I personally really do not like that style of repeating code*/
             userCommunication.informUser(e.getMessage());
+            /* btw, why is there a clearBuffer in there to begin with? */
             userCommunication.clearBuffer();
             return;
         }

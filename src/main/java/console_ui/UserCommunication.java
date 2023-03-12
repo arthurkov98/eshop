@@ -1,4 +1,4 @@
-package user_input;
+package console_ui;
 
 import java.util.Scanner;
 

@@ -1,8 +1,6 @@
 package console_ui;
 
-import services.AddItemToCartService;
 import services.ExitService;
-import user_input.UserCommunication;
 
 public class ExitUIAction implements UIAction {
 

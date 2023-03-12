@@ -1,8 +1,6 @@
 package console_ui;
 
-import database.ItemDatabase;
 import services.ListShopItemsService;
-import user_input.UserCommunication;
 
 import java.util.List;
 

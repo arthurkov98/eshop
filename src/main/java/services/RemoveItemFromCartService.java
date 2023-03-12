@@ -22,13 +22,16 @@ public class RemoveItemFromCartService {
 
     public void execute(String itemName) {
         if(!itemExists(itemName))
+            /* generic exception bad */
             throw new RuntimeException(ERROR_NO_SUCH_ITEM);
 
 
         CartItem cartItem = findCartItemByName(itemName).get();
         Item item = findItemByName(itemName).get();
         Integer newAvailableQuantity = item.getAvailableQuantity() + cartItem.getOrderedQuantity();
+        /* wut? */
         cartItemDatabase.deleteByID(cartItem.getId());
+        /* a headshot, just to be sure that it is dead?  */
         cartItemDatabase.deleteByID(cartItem.getId());
         itemDatabase.changeAvailableQuantity(item.getId(), newAvailableQuantity);
 

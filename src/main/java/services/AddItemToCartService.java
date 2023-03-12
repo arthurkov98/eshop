@@ -6,6 +6,7 @@ import database.ItemDatabase;
 import item.Item;
 import java.util.Optional;
 
+/* why does it implement a nothing-interface? */
 public class AddItemToCartService implements Service{
 
     private static final String ERROR_NO_SUCH_ITEM = "Error: No such item.";
@@ -21,6 +22,7 @@ public class AddItemToCartService implements Service{
 
     public void execute(String itemName, Integer orderedQuantity) {
         if(!itemExists(itemName))
+            /* using generic RuntimeExceptions is not advised */
             throw new RuntimeException(ERROR_NO_SUCH_ITEM);
 
         if(!orderedQuantityValid(orderedQuantity, itemName))
