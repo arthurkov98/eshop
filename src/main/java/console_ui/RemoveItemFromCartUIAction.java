@@ -1,5 +1,6 @@
 package console_ui;
 
+import exception.ItemNotFoundException;
 import services.RemoveItemFromCartService;
 
 public class RemoveItemFromCartUIAction implements UIAction {
@@ -24,14 +25,12 @@ public class RemoveItemFromCartUIAction implements UIAction {
         String userInputItem = userCommunication.getItem();
         try {
             removeItemFromCartService.execute(userInputItem);
-        }catch (RuntimeException e) {
+            userCommunication.informUser(MESSAGE_ITEM_REMOVED);
+        }catch (ItemNotFoundException e) {
             /* I personally really do not like that style of repeating code*/
             userCommunication.informUser(e.getMessage());
             /* btw, why is there a clearBuffer in there to begin with? */
-            userCommunication.clearBuffer();
-            return;
         }
-        userCommunication.informUser(MESSAGE_ITEM_REMOVED);
         userCommunication.clearBuffer();
     }
 

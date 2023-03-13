@@ -1,5 +1,7 @@
 package console_ui;
 
+import cart_item.CartItem;
+import item.Item;
 import services.ListCartItemsService;
 
 import java.util.List;
@@ -22,11 +24,11 @@ public class ListCartItemsUIAction implements UIAction {
     @Override
     public void execute() {
         userCommunication.informUser(HEADER_TEXT);
-        List<String> items= listCartItemsService.execute();
-        if (items.isEmpty()) {
+        List<CartItem> cartItems= listCartItemsService.execute();
+        if (cartItems.isEmpty()) {
             userCommunication.informUser(MESSAGE_CART_IS_EMPTY);
         } else {
-            items.forEach(userCommunication::informUser);
+            cartItems.forEach(item -> userCommunication.informUser(item.toString()));
         }
     }
 

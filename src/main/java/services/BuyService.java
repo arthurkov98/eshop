@@ -7,6 +7,7 @@ import cart_item.CartItem;
 import database.CartDatabase;
 import database.CartItemDatabase;
 import database.ItemDatabase;
+import exception.NotOpenCartException;
 import item.Item;
 
 import java.time.LocalDate;
@@ -20,12 +21,13 @@ public class BuyService {
         this.cartDatabase = cartDatabase;
     }
 
-    public void execute() {
+    public void execute() throws NotOpenCartException{
         Optional<Cart> userCart = cartDatabase.getAllCarts().stream()
                 .filter(cart -> cart.getCartStatus().equals(CartStatus.OPEN))
                 .findFirst();
+
         /* again, generic exceptions are not welcome here */
-        if (userCart.isEmpty()) throw new RuntimeException(ERROR_NO_OPEN_CART);
+        if (userCart.isEmpty()) throw new NotOpenCartException(ERROR_NO_OPEN_CART);
 
         cartDatabase.changeCartStatus(userCart.get().getId(), CartStatus.CLOSED);
         cartDatabase.changeLastActionDate(userCart.get().getId(), LocalDate.now());

@@ -1,11 +1,11 @@
 package services;
 
 /* unused import (ctrl+alt+o) */
-import database.CartItemDatabase;
+
 import database.ItemDatabase;
+import item.Item;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListShopItemsService {
     private final ItemDatabase itemDatabase;
@@ -16,8 +16,8 @@ public class ListShopItemsService {
 
     /* is there a reason for returning those as strings and not items? */
     /* what if we will ditch the console ui? */
-    public List<String> execute(){
+    public List<Item> execute(){
         /* i is a very bad name */
-        return itemDatabase.getAllItems().stream().map(i->i.toString()).collect(Collectors.toList());
+        return itemDatabase.getAllItems();
     }
 }

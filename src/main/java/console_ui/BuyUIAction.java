@@ -1,5 +1,6 @@
 package console_ui;
 
+import exception.NotOpenCartException;
 import services.BuyService;
 
 public class BuyUIAction implements UIAction {
@@ -22,13 +23,12 @@ public class BuyUIAction implements UIAction {
 
         try{
             buyService.execute();
-        }catch (RuntimeException e) {
+            userCommunication.informUser(MESSAGE_CART_IS_CLOSED);
+        }catch (NotOpenCartException e) {
             userCommunication.informUser(e.getMessage());
             /* why is there a clearBuffer? */
-            userCommunication.clearBuffer();
-            return;
         }
-        userCommunication.informUser(MESSAGE_CART_IS_CLOSED);
+        userCommunication.clearBuffer();
     }
 
     @Override

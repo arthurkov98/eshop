@@ -3,6 +3,7 @@ package services;
 import cart_item.CartItem;
 import database.CartItemDatabase;
 import database.ItemDatabase;
+import exception.ItemNotFoundException;
 import item.Item;
 
 import java.util.Optional;
@@ -20,10 +21,10 @@ public class RemoveItemFromCartService {
     }
 
 
-    public void execute(String itemName) {
+    public void execute(String itemName) throws ItemNotFoundException{
         if(!itemExists(itemName))
             /* generic exception bad */
-            throw new RuntimeException(ERROR_NO_SUCH_ITEM);
+            throw new ItemNotFoundException(ERROR_NO_SUCH_ITEM);
 
 
         CartItem cartItem = findCartItemByName(itemName).get();
@@ -32,7 +33,6 @@ public class RemoveItemFromCartService {
         /* wut? */
         cartItemDatabase.deleteByID(cartItem.getId());
         /* a headshot, just to be sure that it is dead?  */
-        cartItemDatabase.deleteByID(cartItem.getId());
         itemDatabase.changeAvailableQuantity(item.getId(), newAvailableQuantity);
 
     }

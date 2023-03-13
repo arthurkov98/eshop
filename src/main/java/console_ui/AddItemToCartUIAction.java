@@ -1,5 +1,7 @@
 package console_ui;
 
+import exception.InvalidQuantityException;
+import exception.NotOpenCartException;
 import services.AddItemToCartService;
 
 import java.util.InputMismatchException;
@@ -31,19 +33,15 @@ public class AddItemToCartUIAction implements UIAction {
             addItemToCartService.execute(userInputItem, orderedQuantity);
             /* can't item_added message be here? */
             /* with no return in catch and single clearBuffer at the end? */
+            userCommunication.informUser(MESSAGE_ITEM_ADDED);
         } catch (InputMismatchException e) {
             /* two nearly identical code blocks */
             /* I would do something like getting quantity as a string, moving number check into service and returning an exception from there */
             /* uiAction probably should not perform any logic anyway */
             userCommunication.informUser(ERROR_NOT_A_NUMBER);
-            userCommunication.clearBuffer();
-            return;
-        }catch (RuntimeException e) {
+        }catch (InvalidQuantityException | NotOpenCartException e) {
             userCommunication.informUser(e.getMessage());
-            userCommunication.clearBuffer();
-            return;
         }
-        userCommunication.informUser(MESSAGE_ITEM_ADDED);
         userCommunication.clearBuffer();
 
     }

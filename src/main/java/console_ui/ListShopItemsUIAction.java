@@ -1,5 +1,6 @@
 package console_ui;
 
+import item.Item;
 import services.ListShopItemsService;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class ListShopItemsUIAction implements UIAction {
     @Override
     public void execute() {
         userCommunication.informUser(HEADER_TEXT);
-        List<String> items= listShopItemsService.execute();
-        items.forEach(userCommunication::informUser);
+        List<Item> items= listShopItemsService.execute();
+        items.forEach(item -> userCommunication.informUser(item.toString()));
     }
 
     @Override
